@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() {
   runApp(const MainApp());
@@ -12,8 +13,8 @@ class MainApp extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         body: Center(
-          heightFactor: 2.0,
-          child: Text('Hello World!'),
+          child: GoogleMap(
+              initialCameraPosition: CameraPosition(target: LatLng(0, 0))),
         ),
       ),
     );
