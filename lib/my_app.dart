@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mapxplore/google_map/google_map_view.dart';
+import 'package:mapxplore/features/google_map/views/google_map_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
