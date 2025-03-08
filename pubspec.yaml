@@ -1,6 +1,6 @@
 name: mapxplore
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -20,3 +20,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/map_styles/night_map_style.json
+    - assets/images/icons/location-point.png

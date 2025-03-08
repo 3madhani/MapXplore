@@ -61,13 +61,17 @@ class _CustomGoogleMapWidgetState extends State<CustomGoogleMapWidget> {
   }
 
   void initMapStyle() async {
-    String nightStyle = await DefaultAssetBundle.of(context).loadString('');
+    String nightStyle = await DefaultAssetBundle.of(context)
+        .loadString('assets/map_styles/night_map_style.json');
     googleMapController.setMapStyle(nightStyle);
   }
 
-  void initMarker() {
+  void initMarker() async {
+    BitmapDescriptor customIcon = await BitmapDescriptor.fromAssetImage(
+        const ImageConfiguration(), 'assets/images/icons/location-point.png');
     for (var place in places) {
       markers.add(Marker(
+        icon: customIcon,
         markerId: MarkerId(place.id.toString()),
         position: place.location,
         infoWindow: InfoWindow(
@@ -75,6 +79,7 @@ class _CustomGoogleMapWidgetState extends State<CustomGoogleMapWidget> {
         ),
       ));
     }
+    setState(() {});
   }
 
   @override
@@ -83,7 +88,7 @@ class _CustomGoogleMapWidgetState extends State<CustomGoogleMapWidget> {
     initMarker();
     _initialCameraPosition = const CameraPosition(
       target: LatLng(30.054053675424868, 31.22491658611096),
-      zoom: 12,
+      zoom: 6,
     );
   }
 }

@@ -3,8 +3,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 List<PlaceModel> places = [
   PlaceModel(
     id: 1,
-    name: 'Egypt',
-    location: const LatLng(30.054053675424868, 31.22491658611096),
+    name: 'Cairo',
+    location: const LatLng(29.969268255191015, 31.24135989566431),
   ),
   PlaceModel(
     id: 2,
