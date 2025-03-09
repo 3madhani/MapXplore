@@ -1,7 +1,8 @@
-import 'dart:ui' as ui;
+// import 'dart:typed_data';
+// import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../data/models/place_model.dart';
@@ -63,16 +64,6 @@ class _CustomGoogleMapWidgetState extends State<CustomGoogleMapWidget> {
     );
   }
 
-  Future<Uint8List> getBytesFromAsset(String path, int width) async {
-    ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-        targetWidth: width);
-    ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
-        .buffer
-        .asUint8List();
-  }
-
   void initMapStyle() async {
     String nightStyle = await DefaultAssetBundle.of(context)
         .loadString('assets/map_styles/night_map_style.json');
@@ -80,8 +71,8 @@ class _CustomGoogleMapWidgetState extends State<CustomGoogleMapWidget> {
   }
 
   void initMarker() async {
-    BitmapDescriptor customIcon = BitmapDescriptor.fromBytes(
-        await getBytesFromAsset('assets/images/icons/location-point.png', 100));
+    BitmapDescriptor customIcon = await BitmapDescriptor.fromAssetImage(
+        const ImageConfiguration(), 'assets/images/icons/location-point.png');
     for (var place in places) {
       markers.add(Marker(
         icon: customIcon,
@@ -104,6 +95,16 @@ class _CustomGoogleMapWidgetState extends State<CustomGoogleMapWidget> {
       zoom: 6,
     );
   }
+
+  // Future<Uint8List> getBytesFromAsset(String path, int width) async {
+  //   ByteData data = await rootBundle.load(path);
+  //   ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+  //       targetWidth: width);
+  //   ui.FrameInfo fi = await codec.getNextFrame();
+  //   return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
+  //       !.buffer
+  //       .asUint8List();
+  // }
 }
 
 // world view of the map 0 -> 3
