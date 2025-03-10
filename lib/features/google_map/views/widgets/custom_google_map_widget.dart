@@ -19,12 +19,14 @@ class _CustomGoogleMapWidgetState extends State<CustomGoogleMapWidget> {
   late GoogleMapController googleMapController;
   Set<Marker> markers = {};
   Set<Polyline> polylines = {};
+  Set<Polygon> polygons = {};
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         GoogleMap(
+          polygons: polygons,
           polylines: polylines,
           onMapCreated: (controller) {
             googleMapController = controller;
@@ -88,6 +90,24 @@ class _CustomGoogleMapWidgetState extends State<CustomGoogleMapWidget> {
     setState(() {});
   }
 
+  void initPolygon() {
+    polygons.add(
+      Polygon(
+        fillColor: Colors.blueAccent.withOpacity(0.5),
+        polygonId: const PolygonId("1"),
+        points: const [
+          LatLng(29.897897903616936, 31.280242880195722),
+          LatLng(29.86571359477232, 31.227811475342325),
+          LatLng(29.87180870045849, 31.21649691018481),
+          LatLng(29.878943960747293, 31.21066819480063),
+          LatLng(29.894253317021274, 31.21203965724397),
+        ],
+        strokeWidth: 5,
+        strokeColor: Colors.green,
+      ),
+    );
+  }
+
   void initPolyLine() {
     polylines.add(
       const Polyline(
@@ -129,6 +149,7 @@ class _CustomGoogleMapWidgetState extends State<CustomGoogleMapWidget> {
     super.initState();
     initMarker();
     initPolyLine();
+    initPolygon();
     _initialCameraPosition = const CameraPosition(
       target: LatLng(30.054053675424868, 31.22491658611096),
       zoom: 12,
