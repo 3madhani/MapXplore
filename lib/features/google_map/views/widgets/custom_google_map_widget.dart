@@ -20,12 +20,14 @@ class _CustomGoogleMapWidgetState extends State<CustomGoogleMapWidget> {
   Set<Marker> markers = {};
   Set<Polyline> polylines = {};
   Set<Polygon> polygons = {};
+  Set<Circle> circles = {};
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         GoogleMap(
+          circles: circles,
           polygons: polygons,
           polylines: polylines,
           onMapCreated: (controller) {
@@ -65,6 +67,19 @@ class _CustomGoogleMapWidgetState extends State<CustomGoogleMapWidget> {
         // ),
         // ),)
       ],
+    );
+  }
+
+  void initCircles() {
+    circles.add(
+      const Circle(
+        circleId: CircleId("1"),
+        center: LatLng(29.971271978777594, 31.240305623789872),
+        radius: 1000,
+        strokeWidth: 5,
+        strokeColor: Colors.green,
+        fillColor: Colors.greenAccent,
+      ),
     );
   }
 
@@ -162,8 +177,7 @@ class _CustomGoogleMapWidgetState extends State<CustomGoogleMapWidget> {
   void initState() {
     super.initState();
     initMarker();
-    initPolyLine();
-    initPolygon();
+    initCircles();
     _initialCameraPosition = const CameraPosition(
       target: LatLng(30.054053675424868, 31.22491658611096),
       zoom: 12,
